@@ -1,4 +1,3 @@
-import 'package:custom_info_window/custom_info_window.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -20,30 +19,6 @@ class DetailsProductView extends StatefulWidget {
 }
 
 class _DetailsProductViewState extends State<DetailsProductView> {
-
-
-  // Controller to manage the custom info window's behavior
-  final CustomInfoWindowController _customInfoWindowController =
-  CustomInfoWindowController();
-
-  // Set of markers to be displayed on the map
-  Set<Marker> markers = {};
-
-  // List of coordinates (LatLng) where markers will be placed
-  final List<LatLng> latlongPoint = [
-    const LatLng(28.5175, 81.7787), // Surkhet
-    const LatLng(27.7293, 85.3343), // Kathmandu
-    const LatLng(28.2096, 83.9856), // Pokhara
-  ];
-
-  // Corresponding names for the locations
-  final List<String> locationNames = [
-    "  Surkhet",
-    "  Kathmandu",
-    "  Pokhara",
-  ];
-
-  // Corresponding image URLs for the locations
   final List<String> locationImages = [
     "https://upload.wikimedia.org/wikipedia/en/0/0d/Surkhet_Airport_-_Aerial_View.jpg",
     "https://cdn.britannica.com/68/178668-050-DA998E6C/Durbar-Square-heart-district-Kathmandu-earthquake-Nepal-April-25-2015.jpg",

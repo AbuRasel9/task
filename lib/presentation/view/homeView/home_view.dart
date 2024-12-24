@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
+import 'package:get/get.dart';
 import 'package:task/presentation/view/detailsProductView/details_product_view.dart';
 import 'package:task/presentation/view/homeView/widget/best_for_widget.dart';
 import 'package:task/presentation/view/homeView/widget/home_tab_widget.dart';
@@ -175,16 +176,12 @@ class _HomeViewState extends State<HomeView> {
                 itemBuilder: (context, index) {
                   return NearFormItemWidget(
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const DetailsProductView(
-                              name: 'Dreamsville House',
-                              address: 'Jl. Sultan Iskandar Muda, Jakarta selatan',
-                              bedroom: '6 Bedroom',
-                              bathroom: '4 Bathroom',
-                            ),
-                          ));
+                      Get.to(const DetailsProductView(
+                        name: 'Dreamsville House',
+                        address: 'Jl. Sultan Iskandar Muda, Jakarta selatan',
+                        bedroom: '6 Bedroom',
+                        bathroom: '4 Bathroom',
+                      ));
                     },
                     image: cardItem[index]["image"] ?? "",
                     title: cardItem[index]["title"] ?? "",
