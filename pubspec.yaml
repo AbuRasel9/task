@@ -39,6 +39,7 @@ dependencies:
   google_maps_flutter:
   geolocator:
   custom_info_window:
+  latlong2:
 
 dev_dependencies:
   flutter_test:
