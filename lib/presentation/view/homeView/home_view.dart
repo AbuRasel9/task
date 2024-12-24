@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 
-import '../menu/widget/menu_widget.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -13,10 +12,21 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
+    final theme=Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        leading: const MenuWidget(),
-        title:Text("Home Screen"),
+        leading: IconButton(
+
+          onPressed: (){
+            if (ZoomDrawer.of(context)!.isOpen()) {
+              ZoomDrawer.of(context)!.close();
+            } else {
+              ZoomDrawer.of(context)!.open();
+            }
+          },
+          icon:  Icon(Icons.menu, color: theme.colorScheme.onSurface,),
+        ),
+        title:const Text("Home Screen"),
       ),
       body: Center(
         child: Text("Home screen"),
