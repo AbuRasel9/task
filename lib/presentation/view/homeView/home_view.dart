@@ -86,140 +86,141 @@ class _HomeViewState extends State<HomeView> {
           ],
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: <Widget>[
-            //<<-------------->> search bar <<-------------->>//
-
-            Row(
-              children: [
-                Expanded(
-                  flex: 4,
-                  child: TextFormField(
-                    decoration: const InputDecoration(
-                        hintText: "Search Address Or Near You",
-                        prefixIcon: Icon(Icons.search_rounded)),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: <Widget>[
+              //<<-------------->> search bar <<-------------->>//
+        
+              Row(
+                children: [
+                  Expanded(
+                    flex: 4,
+                    child: TextFormField(
+                      decoration: const InputDecoration(
+                          hintText: "Search Address Or Near You",
+                          prefixIcon: Icon(Icons.search_rounded)),
+                    ),
                   ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  SizedBox(
+                    height: 48,
+                    width: 52,
+                    child: IconButton(
+                        style: IconButton.styleFrom(
+                            backgroundColor: theme.colorScheme.primary,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(7))),
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.tune,
+                          color: theme.colorScheme.surface,
+                        )),
+                  )
+                ],
+              ),
+              const SizedBox(
+                height: 25,
+              ),
+              //<<-------------->> tab  <<-------------->>//
+        
+              SizedBox(
+                height: 40,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: tabList.length,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    return HomeTabWidget(
+                      isSelect: selectItem == index,
+                      text: tabList[index],
+                      onPressed: () {
+                        selectItem = index;
+                        setState(() {});
+                      },
+                    );
+                  },
                 ),
-                const SizedBox(
-                  width: 5,
-                ),
-                SizedBox(
-                  height: 48,
-                  width: 52,
-                  child: IconButton(
-                      style: IconButton.styleFrom(
-                          backgroundColor: theme.colorScheme.primary,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(7))),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+        
+              //<<-------------->> near form you and see more section <<-------------->>//
+        
+              Row(
+                children: [
+                  Text(
+                    "Near from you",
+                    style: theme.textTheme.bodyLarge,
+                  ),
+                  const Spacer(),
+                  TextButton(
                       onPressed: () {},
-                      icon: Icon(
-                        Icons.tune,
-                        color: theme.colorScheme.surface,
-                      )),
-                )
-              ],
-            ),
-            const SizedBox(
-              height: 25,
-            ),
-            //<<-------------->> tab  <<-------------->>//
-
-            SizedBox(
-              height: 40,
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: tabList.length,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return HomeTabWidget(
-                    isSelect: selectItem == index,
-                    text: tabList[index],
-                    onPressed: () {
-                      selectItem = index;
-                      setState(() {});
-                    },
-                  );
-                },
+                      child: Text(
+                        "See More",
+                        style: theme.textTheme.bodySmall,
+                      ))
+                ],
               ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-
-            //<<-------------->> near form you and see more section <<-------------->>//
-
-            Row(
-              children: [
-                Text(
-                  "Near from you",
-                  style: theme.textTheme.bodyLarge,
+              //<<-------------->> near form list <<-------------->>//
+        
+              SizedBox(
+                height: 220,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: cardItem.length,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    return NearFormItemWidget(
+                      onTap: () {
+        
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const DetailsProductView(
+                                name: 'Dreamsville House',
+                                address: 'Jl. Sultan Iskandar Muda, Jakarta selatan',
+                                bedroom: '6 Bedroom',
+                                bathroom: '4 Bathroom',
+                              ),
+                            ));
+                      },
+                      image: cardItem[index]["image"] ?? "",
+                      title: cardItem[index]["title"] ?? "",
+                      subtitle: cardItem[index]["subtitle"] ?? "",
+                      distance: cardItem[index]["distance"] ?? "",
+                    );
+                  },
                 ),
-                const Spacer(),
-                TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      "See More",
-                      style: theme.textTheme.bodySmall,
-                    ))
-              ],
-            ),
-            //<<-------------->> near form list <<-------------->>//
-
-            SizedBox(
-              height: 220,
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: cardItem.length,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return NearFormItemWidget(
-                    onTap: () {
-
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const DetailsProductView(
-                              name: 'Dreamsville House',
-                              address: 'Jl. Sultan Iskandar Muda, Jakarta selatan',
-                              bedroom: '6 Bedroom',
-                              bathroom: '4 Bathroom',
-                            ),
-                          ));
-                    },
-                    image: cardItem[index]["image"] ?? "",
-                    title: cardItem[index]["title"] ?? "",
-                    subtitle: cardItem[index]["subtitle"] ?? "",
-                    distance: cardItem[index]["distance"] ?? "",
-                  );
-                },
               ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            //<<-------------->> best for you and see more section <<-------------->>//
-
-            Row(
-              children: [
-                Text(
-                  "Near from you",
-                  style: theme.textTheme.bodyLarge,
-                ),
-                const Spacer(),
-                TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      "See More",
-                      style: theme.textTheme.bodySmall,
-                    ))
-              ],
-            ),
-            //<<-------------->> best for you list <<-------------->>//
-
-            Expanded(
-              child: ListView.builder(
+              const SizedBox(
+                height: 10,
+              ),
+              //<<-------------->> best for you and see more section <<-------------->>//
+        
+              Row(
+                children: [
+                  Text(
+                    "Near from you",
+                    style: theme.textTheme.bodyLarge,
+                  ),
+                  const Spacer(),
+                  TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        "See More",
+                        style: theme.textTheme.bodySmall,
+                      ))
+                ],
+              ),
+              //<<-------------->> best for you list <<-------------->>//
+        
+              ListView.builder(
+                physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemCount: 10,
                 itemBuilder: (context, index) {
@@ -233,8 +234,8 @@ class _HomeViewState extends State<HomeView> {
                   );
                 },
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
