@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
         theme: AppThemeData.lightThemeData,
-      home: DrawerScreen(),
+      home: const DrawerScreen(),
     );
   }
 }

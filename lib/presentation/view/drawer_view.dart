@@ -25,7 +25,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
 
       controller: zoomDrawerController,
         menuScreenTapClose: true,
-        menuBackgroundColor: theme.colorScheme.primary,
+        menuBackgroundColor: Colors.blue,
       menuScreen: const MenuScreen(),
       mainScreen: const HomeView(),
       slideWidth: 230,

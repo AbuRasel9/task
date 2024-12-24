@@ -52,7 +52,7 @@ class AppThemeData {
       ),
     ),
     inputDecorationTheme: InputDecorationTheme(
-      fillColor: AppColorSchemes.lightColorScheme.outline.withOpacity(0.01),
+      fillColor: const Color(0xff858585).withOpacity(.2),
       isDense: true,
       filled: true,
       hintStyle: AppTextThemes.lightTextTheme.bodyMedium?.copyWith(
@@ -60,22 +60,22 @@ class AppThemeData {
       ),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(9),
-        borderSide: BorderSide(
-          color: AppColorSchemes.lightColorScheme.outline.withOpacity(0.2),
+        borderSide: const BorderSide(
+          color: Colors.transparent,
           width: 0.85,
         ),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(9),
-        borderSide: BorderSide(
-          color: AppColorSchemes.lightColorScheme.outline.withOpacity(0.2),
+        borderSide: const BorderSide(
+          color: Colors.transparent,
           width: 0.85,
         ),
       ),
       disabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(9),
-        borderSide: BorderSide(
-          color: AppColorSchemes.lightColorScheme.outline.withOpacity(0.2),
+        borderSide: const BorderSide(
+          color: Colors.transparent,
           width: 0.85,
         ),
       ),
