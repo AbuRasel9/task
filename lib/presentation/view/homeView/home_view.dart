@@ -176,12 +176,17 @@ class _HomeViewState extends State<HomeView> {
                 itemBuilder: (context, index) {
                   return NearFormItemWidget(
                     onTap: () {
-                      Get.to(const DetailsProductView(
-                        name: 'Dreamsville House',
-                        address: 'Jl. Sultan Iskandar Muda, Jakarta selatan',
-                        bedroom: '6 Bedroom',
-                        bathroom: '4 Bathroom',
-                      ));
+
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const DetailsProductView(
+                              name: 'Dreamsville House',
+                              address: 'Jl. Sultan Iskandar Muda, Jakarta selatan',
+                              bedroom: '6 Bedroom',
+                              bathroom: '4 Bathroom',
+                            ),
+                          ));
                     },
                     image: cardItem[index]["image"] ?? "",
                     title: cardItem[index]["title"] ?? "",
