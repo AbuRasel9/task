@@ -50,7 +50,7 @@ class _DetailsProductViewState extends State<DetailsProductView> {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween ,
           children: <Widget>[
             RichText(
               text: TextSpan(children: [
