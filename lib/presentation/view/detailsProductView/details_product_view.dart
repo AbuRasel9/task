@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
 
 
 class DetailsProductView extends StatefulWidget {
@@ -25,7 +26,13 @@ class _DetailsProductViewState extends State<DetailsProductView> {
     "https://www.acethehimalaya.com/wp-content/uploads/2024/02/things-to-do-in-pokhara.jpg.webp",
   ];
 
+  late MapController _mapController;
 
+  @override
+  void initState() {
+    super.initState();
+    _mapController = MapController();
+  }
 
   bool _isExpanded = false; // State to toggle between expanded and collapsed
 
@@ -35,12 +42,14 @@ class _DetailsProductViewState extends State<DetailsProductView> {
       "The 3 level house that has a modern design, has a large pool and a garage that fits up to four cars";
  @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+   final LatLng fixedPosition = LatLng(23.754253, 90.393425); // San Francisco's coordinates
+
+   final theme = Theme.of(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-            padding: const EdgeInsets.all(
-              16,
+            padding: const EdgeInsets.only(
+              left: 10,right: 10,top: 16
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -281,6 +290,41 @@ class _DetailsProductViewState extends State<DetailsProductView> {
                         ),
                       );
                     },
+                  ),
+                ),
+                SizedBox(height: 20,),
+                SizedBox(
+                  height: 200,
+                  child: FlutterMap(
+                    mapController: _mapController,
+                    options: MapOptions(
+                      center: fixedPosition,  // Center map at the fixed location
+                      zoom: 16.0,  // Default zoom level
+                      minZoom: 3.0,  // Minimum zoom
+                      maxZoom: 18.0,  // Maximum zoom
+                    ),
+                    children: [
+                      // Tile Layer (OpenStreetMap)
+                      TileLayer(
+                        urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                        subdomains: ['a', 'b', 'c'],
+                      ),
+                      // Marker Layer to show the custom marker
+                      MarkerLayer(
+                        markers: [
+                          Marker(
+                            point: fixedPosition,
+                            builder: (ctx) => Container(
+                              child: Icon(
+                                Icons.location_on,
+                                size: 40.0,
+                                color: Colors.red,  // Custom marker color like Google Maps
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
 
