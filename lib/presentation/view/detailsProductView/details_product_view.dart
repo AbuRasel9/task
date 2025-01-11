@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 
-
 class DetailsProductView extends StatefulWidget {
   const DetailsProductView(
       {super.key,
@@ -40,17 +39,42 @@ class _DetailsProductViewState extends State<DetailsProductView> {
       "The 3 level house that has a modern design, has a large pool and ...";
   String fullDescription =
       "The 3 level house that has a modern design, has a large pool and a garage that fits up to four cars";
- @override
-  Widget build(BuildContext context) {
-   final LatLng fixedPosition = LatLng(23.754253, 90.393425); // San Francisco's coordinates
 
-   final theme = Theme.of(context);
+  @override
+  Widget build(BuildContext context) {
+    final LatLng fixedPosition =
+        LatLng(23.754253, 90.393425); // San Francisco's coordinates
+
+    final theme = Theme.of(context);
     return Scaffold(
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            RichText(
+              text: TextSpan(children: [
+                TextSpan(
+                  text: "Price\n",
+                  style: theme.textTheme.bodyMedium,
+                ),
+                TextSpan(
+                  text: "Rp. 2.500.000.000 / Year",
+                  style: theme.textTheme.bodyLarge,
+                ),
+              ]),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(backgroundColor: theme.colorScheme.primary,),
+              onPressed: () {},
+              child: Text("Rent Now",style: theme.textTheme.bodyMedium?.copyWith(color: Colors.white,),),
+            ),
+          ],
+        ),
+      ),
       body: SingleChildScrollView(
         child: Padding(
-            padding: const EdgeInsets.only(
-              left: 10,right: 10,top: 16
-            ),
+            padding: const EdgeInsets.only(left: 10, right: 10, top: 16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -292,21 +316,24 @@ class _DetailsProductViewState extends State<DetailsProductView> {
                     },
                   ),
                 ),
-                SizedBox(height: 20,),
+                SizedBox(
+                  height: 20,
+                ),
                 SizedBox(
                   height: 200,
                   child: FlutterMap(
                     mapController: _mapController,
                     options: MapOptions(
-                      center: fixedPosition,  // Center map at the fixed location
-                      zoom: 16.0,  // Default zoom level
-                      minZoom: 3.0,  // Minimum zoom
-                      maxZoom: 18.0,  // Maximum zoom
+                      center: fixedPosition, // Center map at the fixed location
+                      zoom: 16.0, // Default zoom level
+                      minZoom: 3.0, // Minimum zoom
+                      maxZoom: 18.0, // Maximum zoom
                     ),
                     children: [
                       // Tile Layer (OpenStreetMap)
                       TileLayer(
-                        urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                        urlTemplate:
+                            'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                         subdomains: ['a', 'b', 'c'],
                       ),
                       // Marker Layer to show the custom marker
@@ -318,7 +345,8 @@ class _DetailsProductViewState extends State<DetailsProductView> {
                               child: Icon(
                                 Icons.location_on,
                                 size: 40.0,
-                                color: Colors.red,  // Custom marker color like Google Maps
+                                color: Colors
+                                    .red, // Custom marker color like Google Maps
                               ),
                             ),
                           ),
@@ -327,9 +355,6 @@ class _DetailsProductViewState extends State<DetailsProductView> {
                     ],
                   ),
                 ),
-
-
-
               ],
             )),
       ),
