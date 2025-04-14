@@ -1,0 +1,230 @@
+import 'package:flutter/material.dart';
+import 'package:task/configs/components/custom_country_code_picker.dart';
+import 'package:task/configs/components/powered_by_widget.dart';
+import 'package:task/configs/routes/routes_name.dart';
+import 'package:task/utils/extensions/context_ext.dart';
+import 'package:task/view/auth/widget/sign_in_with_widget.dart';
+
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
+
+  @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
+  @override
+  Widget build(BuildContext context) {
+    final theme = context.theme;
+    return Scaffold(
+      //powered by text
+      bottomNavigationBar: const Padding(
+        padding: EdgeInsets.only(bottom: 15.0),
+        child: PoweredByWidget(),
+      ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.only(
+              top: 25.0,
+              bottom: 16,
+              left: 16,
+              right: 16,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Sign Up",
+                  style: theme.textTheme.displayLarge,
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  "Let’s save environment together",
+                  style: theme.textTheme.bodyMedium,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  "Name",
+                  style: theme.textTheme.bodyMedium,
+                ),
+                //name text feild
+                TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Enter Name";
+                    }
+                    return null;
+                  },
+                  decoration: const InputDecoration(
+                    hintText: 'e.g: Ahmed Ariyan',
+                  ),
+                ),
+                const SizedBox(height: 12,),
+                Text(
+                  "Phone",
+                  style: theme.textTheme.bodyMedium,
+                ),
+
+                //phone text feild
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                      flex: 1,
+                      child: CustomMobileCountryCode(onChange: (p0) {
+                      
+                      },),
+                    ),
+                    Expanded(
+                      flex: 3,
+                      child: TextFormField(
+                        keyboardType: TextInputType.phone,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Enter Phone";
+                          }
+                          return null;
+                        },
+                      
+                        decoration: const InputDecoration(
+                      
+                          hintText: '17XXXXXXXX',
+                        ),
+                      ),
+                    ),
+
+                  ],
+                ),
+
+                const SizedBox(height: 12,),
+                Text(
+                  "Email",
+                  style: theme.textTheme.bodyMedium,
+                ),
+                //email text feild
+                TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Enter Email";
+                    }
+                    return null;
+                  },
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: const InputDecoration(
+                    hintText: 'user@example.com',
+                  ),
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                Text(
+                  "Password",
+                  style: theme.textTheme.bodyMedium,
+                ),
+
+
+                //password text feild
+                TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Enter password";
+                    }
+                    return null;
+                  },
+                  keyboardType: TextInputType.emailAddress,
+                  decoration:  const InputDecoration(
+
+
+                    hintText: '**********',
+                  ),
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                Text(
+                  "Confirm Password",
+                  style: theme.textTheme.bodyMedium,
+                ),
+                //confirm password text feild
+                TextFormField(
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Enter confirm password";
+                    }
+                    return null;
+                  },
+                  decoration: const InputDecoration(
+                    hintText: '**********',
+                  ),
+                ),
+
+
+                //login button
+                const SizedBox(
+                  height: 20,
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                      onPressed: () {}, child: const Text("Sign Up")),
+                ),
+
+                const SizedBox(
+                  height: 20,
+                ),
+                Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    "Or Sign In with",
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      color: theme.colorScheme.onSurface.withOpacity(.4),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 25,
+                ),
+                //sign in with part
+                SignInWithWidget(
+                  googleOnPressed: () {},
+                  facebookOnPressed: () {},
+                  microsoftOPressed: () {},
+                  appOnPressed: () {},
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                //don't have account text
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      "Already Have Account?",
+                      style: theme.textTheme.bodyMedium,
+                    ),
+                    TextButton(onPressed: () {
+                      Navigator.pushNamed(context, RoutesName.login);
+
+                    }, child:  Text(
+                      "Sign In",
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                          color: theme.colorScheme.primary,
+                          fontWeight: FontWeight.bold),
+                    ))
+
+                  ],
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
