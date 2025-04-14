@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:task/configs/routes/routes_name.dart';
 import 'package:task/view/auth/sign_up_screen.dart';
+import 'package:task/view/home/home_screen.dart';
 import 'package:task/view/home/subModules/details_view/details_view.dart';
 
 import '../../view/auth/sign_in_screen.dart';
@@ -22,6 +23,9 @@ class Routes {
         case RoutesName.detailsScreen:
         return MaterialPageRoute(
             builder: (BuildContext context) => const DetailsScreen());
+        case RoutesName.home:
+        return MaterialPageRoute(
+            builder: (BuildContext context) => const HomeScreen());
 
       default:
         return MaterialPageRoute(builder: (_) {

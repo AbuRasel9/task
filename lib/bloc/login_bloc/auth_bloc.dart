@@ -45,11 +45,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   //login button click
-  void _registration(
-      RegistrationButtonClickEvent event, Emitter<AuthState> emit) {
+  Future<void> _registration(
+      RegistrationButtonClickEvent event, Emitter<AuthState> emit) async {
     try {
-      emit(state.copyWith(loginStatus: LoginStatus.loading));
-      final newUser = _auth
+      emit(state.copyWith(registrationStatus: LoginStatus.loading));
+      final newUser =await _auth
           .createUserWithEmailAndPassword(
               email: state.registrationRequest.email ?? "",
               password: state.registrationRequest.password ?? "")
@@ -62,13 +62,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           });
           print("registration ${value.user}");
           emit(state.copyWith(
-              loginStatus: LoginStatus.success,
+              registrationStatus: LoginStatus.success,
               message: "Registration Successfull"));
         },
       );
     } catch (e) {
+      print("error ---------$e");
       emit(state.copyWith(
-          loginStatus: LoginStatus.error, message: "Registration Failed"));
+          registrationStatus: LoginStatus.error, message: "Registration Failed"));
     }
   }
 

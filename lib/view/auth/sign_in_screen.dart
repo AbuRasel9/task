@@ -154,24 +154,28 @@ class _SignInScreenState extends State<SignInScreen> {
                                             ),
                                           ),
                                         );
-                                    context
-                                        .read<AuthBloc>()
-                                        .add(LoginButtonClickEvent());
-                                    if (state.loginStatus ==
-                                        LoginStatus.success) {
+                                    try {
+                                      context
+                                          .read<AuthBloc>()
+                                          .add(LoginButtonClickEvent());
+
+                                        Navigator.pushNamed(
+                                          context,
+                                          RoutesName.home,
+                                        );
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(const SnackBar(
+                                                content:
+                                                    Text("Login Successfull")));
+                                        _passwordController.clear();
+                                        _emailController.clear();
+
+                                    } catch (e) {
                                       ScaffoldMessenger.of(context)
-                                          .showSnackBar(SnackBar(
-                                              content: Text(state.message)));
-                                      Navigator.pushNamed(
-                                          context, RoutesName.home);
+                                          .showSnackBar(const SnackBar(
+                                              content: Text("Login Failed")));
                                     }
                                   }
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const HomeScreen(),
-                                    ),
-                                  );
                                 },
                                 child: state.loginStatus == LoginStatus.loading
                                     ? const Center(

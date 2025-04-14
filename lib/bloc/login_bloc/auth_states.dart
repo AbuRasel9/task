@@ -9,12 +9,14 @@ class AuthState extends Equatable {
   final RegistrationRequest registrationRequest;
   final String message;
   final LoginStatus loginStatus;
+  final LoginStatus registrationStatus;
 
   AuthState({
     LoginRequest? loginRequest,
     RegistrationRequest? registrationRequest,
     this.message = '',
     this.loginStatus = LoginStatus.inProgress,
+    this.registrationStatus=LoginStatus.inProgress,
   })  : loginRequest = loginRequest ?? LoginRequest(),
         registrationRequest = registrationRequest ?? RegistrationRequest();
 
@@ -23,15 +25,18 @@ class AuthState extends Equatable {
     RegistrationRequest? registrationRequest,
     String? message,
     LoginStatus? loginStatus,
+    LoginStatus? registrationStatus,
   }) {
     return AuthState(
         loginRequest: loginRequest ?? this.loginRequest,
         registrationRequest: registrationRequest ?? this.registrationRequest,
         message: message ?? this.message,
-        loginStatus: loginStatus ?? this.loginStatus);
+        loginStatus: loginStatus ?? this.loginStatus,
+        registrationStatus: loginStatus ?? this.registrationStatus,
+    );
   }
 
   @override
   List<Object?> get props =>
-      [loginRequest, registrationRequest, message, loginStatus];
+      [loginRequest, registrationRequest, message, loginStatus,registrationStatus];
 }

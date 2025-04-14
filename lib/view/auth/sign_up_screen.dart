@@ -193,7 +193,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       width: double.infinity,
                       child: BlocBuilder<AuthBloc, AuthState>(
                         builder: (context, state) {
-                          print("state----------------${state.loginStatus}");
                           return ElevatedButton(
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
@@ -225,23 +224,28 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
 
                                       ScaffoldMessenger.of(context).showSnackBar(
-                                          SnackBar(content: Text(state.message)));
+                                          const SnackBar(content: Text("Registration Successfull")));
+                                      _emailController.clear();
+                                      _nameController.clear();
+                                      _cPasswordController.clear();
+                                      _passwordController.clear();
+                                      _phoneController.clear();
                                       Navigator.pushNamed(context, RoutesName.login);
                                     }catch(e){
-                                      print(e);
-                                    }
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                          const SnackBar(content: Text("Registration Failed")));                                    }
 
 
                                   }
                                 }
                               },
-                              child: state.loginStatus == LoginStatus.loading
+                              child: state.registrationStatus == LoginStatus.loading
                                   ? const Center(
                                       child: CircularProgressIndicator(
                                         color: Colors.white,
                                       ),
                                     )
-                                  : Text("Sign Up"));
+                                  : const Text("Sign Up"));
                         },
                       )),
 
